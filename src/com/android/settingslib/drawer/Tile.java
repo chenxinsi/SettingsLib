@@ -27,6 +27,11 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 
 /**
+ * Parcelable 具体介绍：
+ * http://www.cnblogs.com/renqingping/archive/2012/10/25/Parcelable.html
+ */
+
+/**
  * Description of a single dashboard tile that the user can select.
  */
 public class Tile implements Parcelable {
@@ -90,6 +95,7 @@ public class Tile implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         TextUtils.writeToParcel(title, dest, flags);
         TextUtils.writeToParcel(summary, dest, flags);
         if (icon != null) {
