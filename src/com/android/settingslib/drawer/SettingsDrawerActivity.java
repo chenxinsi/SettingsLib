@@ -59,6 +59,12 @@ public class SettingsDrawerActivity extends Activity {
 
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsDrawerActivity";
+    /**
+     * cxs
+     * isLoggable(string Tag,int level)  ; Log level >= Log.DEBUG return true
+     *
+     * Log.e(error) > w(warning) > i(info) > d(debug) >v(verbose)
+     */
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     public static final String EXTRA_SHOW_MENU = "show_drawer_menu";
@@ -82,7 +88,6 @@ public class SettingsDrawerActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         long startTime = System.currentTimeMillis();
 
         TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
@@ -137,6 +142,16 @@ public class SettingsDrawerActivity extends Activity {
 
         if (mDrawerLayout != null) {
             final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+            /**
+             * xinsi
+             *
+             * Intent.ACTION_PACKAGE_REMOVED:
+             * Broadcast Action: An existing application package has been removed from the device.
+             *
+             * Intent.ACTION_PACKAGE_REPLACED:
+             * Broadcast Action: A new version of an application package has been installed,
+             * replacing an existing version that was previously installed.
+             */
             filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
             filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
             filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
@@ -236,6 +251,14 @@ public class SettingsDrawerActivity extends Activity {
         if (parent != null) {
             parent.removeAllViews();
         }
+        /**
+         * xinsi
+         *
+         * layoutInflater.inflate(resourceId, root); 创建一个布局的实例 resourceId：布局id root:父布局
+         * 动态添加View, LayoutInflater用的广泛
+         *
+         * http://blog.csdn.net/guolin_blog/article/details/12921889
+         */
         LayoutInflater.from(this).inflate(layoutResID, parent);
     }
 
