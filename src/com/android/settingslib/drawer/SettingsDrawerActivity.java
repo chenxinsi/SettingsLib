@@ -226,12 +226,20 @@ public class SettingsDrawerActivity extends Activity {
         }
     }
 
+    /**
+     * xinsi
+     * 打开从左边出现的抽屉
+     */
     public void openDrawer() {
         if (mDrawerLayout != null) {
             mDrawerLayout.openDrawer(Gravity.START);
         }
     }
 
+    /**
+     * xinsi
+     * 关闭所有出现的抽屉
+     */
     public void closeDrawer() {
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawers();
@@ -313,6 +321,10 @@ public class SettingsDrawerActivity extends Activity {
         }
     }
 
+    /**
+     * xinsi
+     * 点击 Tile
+     */
     public boolean openTile(Tile tile) {
         closeDrawer();
         if (tile == null) {
@@ -396,6 +408,11 @@ public class SettingsDrawerActivity extends Activity {
     }
 
     private class CategoriesUpdater extends AsyncTask<Void, Void, List<DashboardCategory>> {
+        /**
+         * xinsi
+         * 不能直接操作UI ,后台操作
+         * 比较耗时的操作都可以用这方法
+         */
         @Override
         protected List<DashboardCategory> doInBackground(Void... params) {
             if (sConfigTracker.applyNewConfig(getResources())) {
@@ -404,6 +421,10 @@ public class SettingsDrawerActivity extends Activity {
             return TileUtils.getCategories(SettingsDrawerActivity.this, sTileCache);
         }
 
+        /**
+         * xinsi
+         * 任务执行之前,开始执行此方法
+         */
         @Override
         protected void onPreExecute() {
             if (sConfigTracker == null || sTileCache == null) {
@@ -411,6 +432,10 @@ public class SettingsDrawerActivity extends Activity {
             }
         }
 
+        /**
+         * xinsi
+         * 主（UI）线程  来处理  doInBackground 返回的结果
+         */
         @Override
         protected void onPostExecute(List<DashboardCategory> dashboardCategories) {
             for (int i = 0; i < dashboardCategories.size(); i++) {

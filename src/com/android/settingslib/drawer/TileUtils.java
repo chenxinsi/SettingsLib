@@ -184,6 +184,10 @@ public class TileUtils {
             String defaultCategory, ArrayList<Tile> outTiles, boolean requireSettings) {
         Intent intent = new Intent(action);
         if (requireSettings) {
+            /**
+             * xinsi
+             * intent 增加包名 可增强安全性
+             */
             intent.setPackage(SETTING_PKG);
         }
         getTilesForIntent(context, user, intent, addedCache, defaultCategory, outTiles,
@@ -194,6 +198,11 @@ public class TileUtils {
             Map<Pair<String, String>, Tile> addedCache, String defaultCategory, List<Tile> outTiles,
             boolean usePriority, boolean checkCategory) {
         PackageManager pm = context.getPackageManager();
+        /**
+         * xinsi
+         * pm.queryIntentActivities(Intent intent, int i)
+         * 返回 ResolveInfo （相当于activity） 集合
+         */
         List<ResolveInfo> results = pm.queryIntentActivitiesAsUser(intent,
                 PackageManager.GET_META_DATA, user.getIdentifier());
         for (ResolveInfo resolved : results) {
